@@ -1,0 +1,111 @@
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slideUpFade {
+  animation: slideUpFade 0.6s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.btn {
+  @apply px-6 py-3 rounded-lg font-medium transition-all duration-300 
+         focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-primary-600 text-white hover:bg-primary-700 
+         focus:ring-primary-500 shadow-lg hover:shadow-xl
+         hover:scale-105 active:scale-95;
+}
+
+.image-upload-area {
+  @apply border-2 border-dashed border-gray-300 rounded-xl p-8
+         hover:border-primary-400 transition-colors duration-300
+         cursor-pointer bg-white/50 backdrop-blur-sm;
+}
+
+.image-upload-area.dragging {
+  @apply border-primary-500 bg-primary-50 scale-105;
+}
+
+.result-item {
+  @apply transform transition-all duration-300 hover:scale-105;
+}
+
+.loading-leaf {
+  @apply absolute h-3 w-3 rounded-full bg-emerald-500;
+  animation: grow 1.5s infinite ease-out;
+} 

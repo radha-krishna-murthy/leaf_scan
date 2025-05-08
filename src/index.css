@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gradient-to-b from-green-50 to-blue-50 min-h-screen text-gray-800;
+  }
+
+  ::selection {
+    @apply bg-primary-200 text-primary-900;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-full font-medium transition-all duration-300 transform relative overflow-hidden;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-emerald-500 to-green-500 
+           text-white shadow-lg hover:shadow-emerald-300/50 
+           hover:scale-[1.02] active:scale-[0.98] relative;
+  }
+  
+  .btn-primary::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r 
+           from-emerald-400 to-green-400 opacity-0 
+           transition-opacity duration-300 rounded-full -z-10;
+    content: '';
+  }
+  
+  .btn-primary:hover::before {
+    @apply opacity-100;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md rounded-2xl shadow-lg 
+           border border-white/20 transition-all duration-300;
+  }
+  
+  .glass-card:hover {
+    @apply shadow-xl bg-white/90;
+  }
+  
+  .image-upload-area {
+    @apply border-2 border-dashed border-emerald-300 
+           bg-emerald-50/50 rounded-xl p-8 
+           transition-all duration-300 cursor-pointer
+           hover:border-emerald-400 hover:bg-emerald-50/80 relative
+           focus-within:border-emerald-500 focus-within:ring-2 
+           focus-within:ring-emerald-200;
+  }
+  
+  .image-upload-area.dragging {
+    @apply border-emerald-500 bg-emerald-100/80 scale-[1.02] 
+           shadow-lg shadow-emerald-200/30;
+  }
+  
+  .image-upload-area::after {
+    @apply content-[''] absolute inset-0 rounded-xl opacity-0
+           transition-opacity duration-300 bg-gradient-to-tr
+           from-emerald-500/10 to-transparent pointer-events-none;
+    content: '';
+  }
+  
+  .image-upload-area:hover::after {
+    @apply opacity-100;
+  }
+
+  .loading-leaf {
+    @apply h-4 w-4 rounded-full bg-emerald-500 absolute;
+    animation: grow 2s infinite ease-in-out;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(5deg);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
+  }
+  
+  @keyframes grow {
+    0% {
+      transform: scale(0) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5) rotate(45deg);
+      opacity: 0;
+    }
+  }
+  
+  .leaf-particle {
+    position: absolute;
+    animation: float 8s infinite ease-in-out;
+  }
+
+  @keyframes slideUpFade {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .result-item {
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  .result-item:nth-child(1) { animation-delay: 0.1s; }
+  .result-item:nth-child(2) { animation-delay: 0.2s; }
+  .result-item:nth-child(3) { animation-delay: 0.3s; }
+  .result-item:nth-child(4) { animation-delay: 0.4s; }
+
+  .bg-leaf-texture {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" opacity="0.05"><path fill="%2322c55e" d="M20,20 Q40,0 60,20 Q80,40 60,60 Q40,80 20,60 Q0,40 20,20 Z"/></svg>');
+    background-size: 120px 120px;
+  }
+}
