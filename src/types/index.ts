@@ -7,6 +7,7 @@ export interface LeafAnalysisResult {
   sunlight: string;
   temperature: string;
   careInstructions: string;
+  accuracy: number;
   disease?: {
     name: string;
     description: string;

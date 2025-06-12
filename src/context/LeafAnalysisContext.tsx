@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { LeafAnalysisResult } from '../types';
 
-const API_KEY = 'AIzaSyDgMq_XN04HPlT-G-skttYMtT0XnTg02CI';
+const API_KEY = 'AIzaSyAQX3Ost5JOf9VTo6xObSYoUowjrMtk2HE';
 const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 interface LeafAnalysisContextType {
@@ -65,6 +65,12 @@ export const LeafAnalysisProvider: React.FC<LeafAnalysisProviderProps> = ({ chil
         "sunlight": "specific sunlight requirements for this vegetable",
         "temperature": "optimal temperature range for this vegetable",
         "careInstructions": "specific care instructions for this vegetable",
+        "accuracy": "confidence percentage (0-100) based on how distinctive and clear the leaf characteristics are. Consider:
+          - If the leaf has very distinctive features (e.g., unique shape, color, texture) that make identification certain: 85-95%
+          - If the leaf has clear features but some common characteristics with other plants: 70-85%
+          - If the leaf has some distinctive features but image quality or angle makes identification less certain: 50-70%
+          - If the leaf features are not very clear or image quality is poor: 30-50%
+          - If the leaf is very generic or image quality is very poor: 0-30%",
         "disease": {
           "name": "disease name if any",
           "description": "disease description",
@@ -79,7 +85,7 @@ export const LeafAnalysisProvider: React.FC<LeafAnalysisProviderProps> = ({ chil
         }
       }
 
-      Be very specific about the vegetable identification. If you're not completely certain, indicate that in the name field.`;
+      Be very specific about the vegetable identification. If you're not completely certain, indicate that in the name field and provide a lower accuracy percentage.`;
 
       const response = await fetch(`${API_ENDPOINT}?key=${API_KEY}`, {
         method: 'POST',
@@ -113,7 +119,7 @@ export const LeafAnalysisProvider: React.FC<LeafAnalysisProviderProps> = ({ chil
       }
 
       const data = await response.json();
-      
+
       if (!data.candidates?.[0]?.content?.parts?.[0]?.text) {
         throw new Error('Invalid response from API');
       }
@@ -121,14 +127,14 @@ export const LeafAnalysisProvider: React.FC<LeafAnalysisProviderProps> = ({ chil
       // Extract the JSON response from Gemini's text output
       const responseText = data.candidates[0].content.parts[0].text;
       const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-      
+
       if (!jsonMatch) {
         throw new Error('Could not parse API response');
       }
 
       try {
         const result = JSON.parse(jsonMatch[0]) as LeafAnalysisResult;
-        
+
         // Validate the result structure
         if (!result.name || !result.type || !result.health) {
           throw new Error('Invalid analysis result structure');
