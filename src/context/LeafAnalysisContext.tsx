@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { LeafAnalysisResult } from '../types';
 
-const API_KEY = 'AIzaSyD2AUHZzqdbwhDFKnTXJIZCsIPvR3nyJDM';
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 interface LeafAnalysisContextType {
