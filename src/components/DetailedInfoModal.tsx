@@ -10,7 +10,7 @@ interface DetailedInfoModalProps {
   hasDisease: boolean;
 }
 
-const API_KEY = 'AIzaSyDgMq_XN04HPlT-G-skttYMtT0XnTg02CI';
+const API_KEY = 'AIzaSyD2AUHZzqdbwhDFKnTXJIZCsIPvR3nyJDM';
 const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 const DetailedInfoModal: React.FC<DetailedInfoModalProps> = ({
@@ -112,7 +112,7 @@ const DetailedInfoModal: React.FC<DetailedInfoModalProps> = ({
       const data = await response.json();
       const responseText = data.candidates[0].content.parts[0].text;
       const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-      
+
       if (!jsonMatch) {
         throw new Error('Invalid response format');
       }

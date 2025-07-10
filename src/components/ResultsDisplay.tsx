@@ -4,7 +4,7 @@ import { useLeafAnalysis } from '../context/LeafAnalysisContext';
 import DetailedInfoModal from './DetailedInfoModal';
 import html2canvas from 'html2canvas';
 
-const API_KEY = 'AIzaSyDgMq_XN04HPlT-G-skttYMtT0XnTg02CI';
+const API_KEY = 'AIzaSyD2AUHZzqdbwhDFKnTXJIZCsIPvR3nyJDM';
 const API_ENDPOINT = 'https://vision.googleapis.com/v1/images:annotate';
 
 const ResultsDisplay: React.FC = () => {
